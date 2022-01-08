@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login</title>
+</head>
+<style type="text/css">
+	 .center {
+	 	display: block;
+  		margin-left: auto;
+  		margin-right: auto;
+  		margin-bottom: 20px;
+} 
+.button {
+  background-color: #4CAF53;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+</style>
+<body bgcolor="#262726">		
+	<table align="center" style="width: 450px; height: 450px">
+		<br><br><br>
+		<tr>
+		<td style="background-color: black; border-radius: 15px" >
+			<img src="{% static 'img/logo.jpg' %}" class="center" style="height: 100px">
+
+<!-- Javascript Start-->
+<script type="text/javascript">
+//email validation starts
+function email_validation(){
+'use strict';
+var mailformat = /^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$/;
+var email_name = document.getElementById("email");
+var email_value = document.getElementById("email").value;
+var email_length = email_value.length;
+if(!email_value.match(mailformat) || email_length === 0)
+{
+document.getElementById('email_err').innerHTML= "<br/>Username only accept email";
+email_name.focus();
+document.getElementById('email_err').style.color = "#FF0000";
+}
+else
+{
+document.getElementById('email_err').innerHTML = '<br/>Valid email';
+document.getElementById('email_err').style.color = "#00AF33";
+}
+}
+//email validation ends
+
+//password validation starts
+function verifyPassword() {
+  var pw = document.getElementById("pswd").value;
+  //check empty password field
+  if(pw == "SmartServTest@123") {
+     document.getElementById("message").innerHTML = "<br/>password is correct!"
+     document.getElementById('message').style.color = "#00AF33";
+;
+     return true;
+  }
+ 
+ //minimum password length validation
+  if(pw.length < 8) {
+     document.getElementById("message").innerHTML = "<br/>Password length must be atleast 8 characters";
+     return false;
+  }
+
+//maximum length of password validation
+  if(pw.length > 15) {
+     document.getElementById("message").innerHTML = "<br/>Password length must not exceed 15 characters";
+     return false;
+  } else {
+     alert("Password is correct");
+  }
+}
+
+//password validation ends
+
+</script>
+
+			
+
+<!-- javascript end-->
+
+			<form name="registration" method="post" action="" onsubmit="return validateform()" > 
+				{% csrf_token %}
+			<center>
+				<input type="text" name="email" id="email" size="50" placeholder="  Username" name="email" required style="width: 225px; height: 30px; border-radius: 7px" onBlur="email_validation();"/><span id="email_err"></span>
+				<br><br>
+			
+			<label for="password"><input type="password" name="passid" id="pswd" size="12" placeholder="  Password" name="password" required style="width: 225px; height: 30px; border-radius: 7px" onBlur="verifyPassword();"/><span id = "message" style="color:red"> </span> 
+			</label></br><br>
+			<input type="submit" value="login" class="button" style="width:225px; height: 30px; border-radius: 7px" onclick="redirect();"><br><br>
+			<a href="/">Forgot your password?</a>
+            </center>
+			</form>
+		</td>
+	</tr>
+	
+	</table>
+
+</body>
+</html>
